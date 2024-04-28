@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key'  # You should replace this with your actual secret key
+app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gym.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -46,8 +46,11 @@ def login():
         else:
             flash('Login failed. Check your credentials.', 'danger')
     return render_template('login.html')
-
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        # Uncomment the following two lines to reset the database
+       #  db.drop_all()
+       #  db.create_all()
+      pass   # This is a placeholder; remove 'pass' when uncommenting the above lines
     app.run(debug=True)
+
