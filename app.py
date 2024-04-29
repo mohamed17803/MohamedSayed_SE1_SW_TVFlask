@@ -49,8 +49,8 @@ def login():
 if __name__ == '__main__':
     with app.app_context():
         # Uncomment the following two lines to reset the database
-       #  db.drop_all()
-       #  db.create_all()
-      pass   # This is a placeholder; remove 'pass' when uncommenting the above lines
+         db.drop_all()
+         db.create_all()
+         # This is a placeholder; remove 'pass' when uncommenting the above lines
     app.run(debug=True)
 
