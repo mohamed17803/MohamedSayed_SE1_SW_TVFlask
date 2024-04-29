@@ -1,18 +1,19 @@
 from locust import HttpUser, task, between
+import uuid
 
-class QuickstartUser(HttpUser):
+class UserBehavior(HttpUser):
     wait_time = between(1, 2.5)
 
     @task
-    def index_page(self):
-        self.client.get("/")
+    def register(self):
+        # Generate a unique username and email for each request
+        unique_id = str(uuid.uuid4())
+        username = f'user_{unique_id}'
+        email = f'{username}@example.com'
+        password = 'password'
 
-    @task(3)
-    def view_item(self):
-        for item_id in range(10):
-            self.client.get(f"/item?id={item_id}", name="/item")
-            self.wait()
-
-    @task(1)
-    def about(self):
-        self.client.get("/about/")
+        self.client.post("/register", {
+            "username": username,
+            "email": email,
+            "password": password
+        })
